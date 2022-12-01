@@ -4,6 +4,7 @@ const { types, pokemons } = require('../db')
 
 router.get('/', async (req, res) => {
   const { name } = req.query
+
   if (name) {
     const poke = await pokemons.findOne({ where: { name } })
     if (poke) return res.json(poke)
