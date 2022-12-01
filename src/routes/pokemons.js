@@ -8,12 +8,12 @@ router.get('/', async (req, res) => {
   if (name) {
     const poke = await pokemons.findOne({ where: { name } })
     if (poke) return res.json(poke)
-    return res.status(404).json({ error: 'Pokemon doesn\'t exists' })
+    return res.status(404).json({ error: "Pokemon doesn't exists" })
   }
 
   try {
     const poke = await pokemons.findAll({
-      include: types
+      include: types,
     })
     res.json(poke)
   } catch (error) {
@@ -43,7 +43,7 @@ router.post('/', async (req, res) => {
         if (secondary) await poke.addTypes([primary, secondary])
         else await poke.addTypes(primary)
         const pokeType = await pokemons.findByPk(poke.name, {
-          include: types
+          include: types,
         })
         return res.json({ created: 'Pokemon created successfully', pokeType })
       }
