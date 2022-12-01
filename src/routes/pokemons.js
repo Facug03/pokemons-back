@@ -43,7 +43,7 @@ router.post('/', async (req, res) => {
         if (secondary) await poke.addTypes([primary, secondary])
         else await poke.addTypes(primary)
         const pokeType = await pokemons.findByPk(poke.name, {
-          include: types,
+          include: types
         })
         return res.json({ created: 'Pokemon created successfully', pokeType })
       }
