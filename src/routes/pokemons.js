@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 
   try {
     const poke = await pokemons.findAll({
-      include: types,
+      include: types
     })
     res.json(poke)
   } catch (error) {
