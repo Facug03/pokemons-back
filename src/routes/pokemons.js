@@ -1,21 +1,6 @@
 const { Router } = require('express')
 const router = Router()
 const { types, pokemons } = require('../db')
-const axios = require('axios')
-require('dotenv').config()
-
-router.get('/brawl', async (req, res) => {
-  try {
-    const rest = await axios(
-      `https://api.brawlstars.com/v1/players/%23GRCJCL02?authorization=Bearer ${process.env.BRAWL}`
-    )
-    console.log(rest.data)
-    res.json(rest.data)
-  } catch (error) {
-    console.log(error)
-    res.json(error)
-  }
-})
 
 router.get('/', async (req, res) => {
   const { name } = req.query
