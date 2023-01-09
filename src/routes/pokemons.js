@@ -9,9 +9,10 @@ router.get('/brawl', async (req, res) => {
     const rest = await axios(
       `https://api.brawlstars.com/v1/players/%23GRCJCL02?authorization=Bearer ${process.env.BRAWL}`
     )
-
+    console.log(rest.data)
     res.json(rest.data)
   } catch (error) {
+    console.log(error)
     res.json(error)
   }
 })
