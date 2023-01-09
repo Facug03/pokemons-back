@@ -5,11 +5,15 @@ const axios = require('axios')
 require('dotenv').config()
 
 router.get('/brawl', async (req, res) => {
-  const rest = await axios(
-    `https://api.brawlstars.com/v1/players/%23GRCJCL02?authorization=Bearer ${process.env.BRAWL}`
-  )
+  try {
+    const rest = await axios(
+      `https://api.brawlstars.com/v1/players/%23GRCJCL02?authorization=Bearer ${process.env.BRAWL}`
+    )
 
-  res.json(rest.data)
+    res.json(rest.data)
+  } catch (error) {
+    res.json(error)
+  }
 })
 
 router.get('/', async (req, res) => {
