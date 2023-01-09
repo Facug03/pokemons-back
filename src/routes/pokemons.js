@@ -1,6 +1,16 @@
 const { Router } = require('express')
 const router = Router()
 const { types, pokemons } = require('../db')
+const axios = require('axios')
+require('dotenv').config()
+
+router.get('/brawl', async (req, res) => {
+  const rest = await axios(
+    `https://api.brawlstars.com/v1/players/%23GRCJCL02?authorization=Bearer ${process.env.BRAWL}`
+  )
+
+  res.json(rest.data)
+})
 
 router.get('/', async (req, res) => {
   const { name } = req.query
@@ -13,7 +23,7 @@ router.get('/', async (req, res) => {
 
   try {
     const poke = await pokemons.findAll({
-      include: types
+      include: types,
     })
     res.json(poke)
   } catch (error) {
@@ -43,7 +53,7 @@ router.post('/', async (req, res) => {
         if (secondary) await poke.addTypes([primary, secondary])
         else await poke.addTypes(primary)
         const pokeType = await pokemons.findByPk(poke.name, {
-          include: types
+          include: types,
         })
         return res.json({ created: 'Pokemon created successfully', pokeType })
       }
